@@ -26,7 +26,7 @@ const Login = () => {
         loginUserApi(data, dispatch)
             .then(res => {
                 console.log(res)
-                dispatch(loginUserSuccess(res.data));
+                dispatch(loginUserSuccess(res.data.token));
                 localStorage.setItem('role', ROLE.USER)
                 localStorage.setItem('access_token', res.data.token);
                 navigate('/bill');
@@ -42,7 +42,7 @@ const Login = () => {
         loginAdminApi(data, dispatch)
             .then(res => {
                 console.log(res);
-                dispatch(loginAdminSuccess(res.data));
+                dispatch(loginAdminSuccess(res.data.token));
                 localStorage.setItem('role', ROLE.ADMIN);
                 localStorage.setItem('access_token', res.data.token);
                 navigate('/bill');
