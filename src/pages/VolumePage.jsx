@@ -1,5 +1,5 @@
 import React from 'react'
-import Volume from '../containers/Volume'
+import Volume from '../containers/Volume/VolumeContainer'
 
 const VolumePage = () => {
   return <Volume/>

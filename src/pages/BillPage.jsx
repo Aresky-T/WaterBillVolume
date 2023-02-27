@@ -1,5 +1,5 @@
 import React from 'react'
-import Bill from '../containers/Bill'
+import Bill from '../containers/Bill/BillContainer'
 
 const BillPage = () => {
   return <Bill/>
