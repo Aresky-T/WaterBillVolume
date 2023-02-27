@@ -23,7 +23,7 @@ function VolumeForUser({ year, month, date, setYear, setMonth, setDate, setHourS
             </div>
             <div className="volume-right">
                 <div className="filter-bar">
-                    <h4>Filter for you</h4>
+                    <h4>Filter bar</h4>
                     <div className='filter-input'>
                         <div>
                             <input type="radio" name="filter" id="year"
@@ -57,46 +57,9 @@ function VolumeForUser({ year, month, date, setYear, setMonth, setDate, setHourS
                         </div>
                     </div>
                 </div>
-                <div className="volume-right">
-                    <div className="filter-bar">
-                        <h4>Filter bar</h4>
-                        <div className='filter-input'>
-                            <div>
-                                <input type="radio" name="filter" id="year"
-                                    onChange={() => {
-                                        setFilterMonth(false);
-                                        setFilterYear(true);
-                                        setFilterDate(false)
-                                    }}
-                                />
-                                <label htmlFor="year">Year</label>
-                            </div>
-                            <div>
-                                <input type="radio" name="filter" id="month"
-                                    onChange={() => {
-                                        setFilterMonth(true);
-                                        setFilterYear(false);
-                                        setFilterDate(false)
-                                    }}
-                                />
-                                <label htmlFor="month">Month</label>
-                            </div>
-                            <div>
-                                <input type="radio" name="filter" id="date"
-                                    onChange={() => {
-                                        setFilterMonth(false);
-                                        setFilterYear(false);
-                                        setFilterDate(true)
-                                    }}
-                                />
-                                <label htmlFor="date">Date</label>
-                            </div>
-                        </div>
-                    </div>
-                    {filterYear && <><FilterYear setYear={setYear} year={year} /></>}
-                    {filterMonth && <><FilterMonth setYear={setYear} setMonth={setMonth} year={year} month={month} /></>}
-                    {filterDate && <><FilterDate setYear={setYear} setMonth={setMonth} setDate={setDate} year={year} month={month} date={date} /></>}
-                </div>
+                {filterYear && <><FilterYear setYear={setYear} year={year} /></>}
+                {filterMonth && <><FilterMonth setYear={setYear} setMonth={setMonth} year={year} month={month} /></>}
+                {filterDate && <><FilterDate setYear={setYear} setMonth={setMonth} setDate={setDate} year={year} month={month} date={date} /></>}
             </div>
         </div >
     );

@@ -34,6 +34,7 @@ export const getVolumeForUser = async (data, token, dispatch) => {
 
 export const getBillForUser = async (data, token, dispatch) => {
     console.log("Running get bill api...")
+    console.log(token)
     // const config = {
     //     headers: {
     //         Authorization: `Bearer ${token}`

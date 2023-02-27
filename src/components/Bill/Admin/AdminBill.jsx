@@ -17,8 +17,6 @@ const BillForAdmin = ({ user, year, month, date, setUser, setYear, setMonth, set
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.role.admin.currentUser);
 
-    console.log(currentUser)
-
     return (
         <div className='session bill-admin'>
             <div className="bill_left">
@@ -28,6 +26,7 @@ const BillForAdmin = ({ user, year, month, date, setUser, setYear, setMonth, set
                     <button
                         className={item._id === currentUser?._id ? 'active' : ''}
                         onClick={() => {
+                            console.log(item)
                             dispatch(addCurrentUser(item));
                             dispatch(addPage("bill"))
                         }}

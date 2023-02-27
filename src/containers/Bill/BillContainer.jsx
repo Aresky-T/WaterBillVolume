@@ -15,9 +15,6 @@ const Bill = () => {
   const [hourEnd, setHourEnd] = useState();
   const [user, setUser] = useState('');
 
-  console.log({ userId: user._id, year, month, date })
-
-
   return (
     <div>
       {role === ROLE.ADMIN && <BillForAdmin

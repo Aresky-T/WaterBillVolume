@@ -13,9 +13,6 @@ function VolumeForAdmin({ user, year, month, date, setUser, setYear, setMonth, s
     const [filterDate, setFilterDate] = useState(false);
     const currentUser = useSelector((state) => state.role.admin.currentUser);
     const dispatch = useDispatch()
-
-    console.log(currentUser)
-
     
     return (
         <div className='session volume-admin'>

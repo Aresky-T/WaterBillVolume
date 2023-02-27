@@ -12,7 +12,7 @@ const FilterYear = ({ setYear, year }) => {
     const dataVolumn = useSelector((s) => s.water.volumn.data)
     const page = useSelector((s) => s.role.admin.page)
 
-    console.log(dataVolumn)
+    console.log(user)
 
     const dispatch = useDispatch()
 

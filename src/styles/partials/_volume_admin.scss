@@ -5,6 +5,7 @@
     border: 1px solid #ccc;
     padding: 20px;
     background-color: #e8e8e8a3;
+    border-radius: 15px;
 
     .volume_left{
         height: 500px;
@@ -32,6 +33,7 @@
             display: flex;
             justify-content: flex-start;
             margin: 5px;
+            border-radius: 5px;
 
             span {
                 margin-right: 20px;
@@ -61,6 +63,7 @@
         justify-content: flex-start;
         align-items: center;
         border: 1px solid #fff;
+        border-radius: 10px;
 
         .filter-bar{
             background-color: #ffffff;
@@ -68,6 +71,7 @@
             padding: 10px;
             margin-bottom: 20px;
             text-align: center;
+            border-radius: 15px;
 
             h4 {
                 margin-bottom: 10px;
@@ -98,6 +102,7 @@
             background-color: #ffffff;
             display: flex;
             flex-direction: column;
+            border-radius: 15px;
 
             label {
                 font-size: 14px;
@@ -127,6 +132,7 @@
                 background-color: #000;
                 color: #fff;
                 font-weight: 550;
+                border-radius: 5px;
                 cursor: pointer;
 
                 &:hover {

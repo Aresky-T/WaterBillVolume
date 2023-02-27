@@ -11,7 +11,7 @@ const FilterMonth = ({ setMonth, setYear, year, month }) => {
     const dataBill = useSelector((s) => s.water.bill.data)
     const dataVolumn = useSelector((s) => s.water.volumn.data)
     const page = useSelector((s) => s.role.admin.page)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     function getVolume() {
         const data = {
@@ -24,8 +24,9 @@ const FilterMonth = ({ setMonth, setYear, year, month }) => {
     }
 
     function getVolumesByAdmin() {
+        console.log(user)
         const data = {
-            userId: user._id,
+            userId: user?._id,
             year: year,
             month: month,
         }
@@ -45,8 +46,9 @@ const FilterMonth = ({ setMonth, setYear, year, month }) => {
     }
 
     function getBillsByAdmin() {
+        console.log("user: ", user.id)
         const data = {
-            userId: user._id,
+            userId: user?._id,
             year: year,
             month: month
         }
