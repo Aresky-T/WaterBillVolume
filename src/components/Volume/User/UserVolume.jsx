@@ -4,18 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import FilterYear from '../../Filter/FilterYear';
 import FilterMonth from '../../Filter/FilterMonth';
 import FilterDate from '../../Filter/FilterDate';
-import { addPage } from '../../../redux/role.slice';
 
 function VolumeForUser({ year, month, date, setYear, setMonth, setDate, setHourStart, setHourEnd }) {
     const [filterYear, setFilterYear] = useState(false);
     const [filterMonth, setFilterMonth] = useState(false);
     const [filterDate, setFilterDate] = useState(false);
-
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(addPage("volume"))
-    })
-
+    
     return (
         <div className='session volume-admin'>
             <div className="volume_left">

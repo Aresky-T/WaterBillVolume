@@ -7,24 +7,19 @@ import { getVolumeForUser } from '../../apis/water.api'
 import { addVolume } from "../../redux/water.slice";
 
 const Volume = (props) => {
-    const token = useSelector((state) => state.auth.login.token);
     const role = useSelector((state) => state.auth.login.role);
-    const [year, setYear] = useState('');
-    const [month, setMonth] = useState('');
-    const [date, setDate] = useState('');
-    const [hourStart, setHourStart] = useState('');
-    const [hourEnd, setHourEnd] = useState('');
-    const [user, setUser] = useState('');
-    const dispatch = useDispatch();
+    const [year, setYear] = useState();
+    const [month, setMonth] = useState();
+    const [date, setDate] = useState();
+    const [hourStart, setHourStart] = useState();
+    const [hourEnd, setHourEnd] = useState();
 
-    console.log({ userId: user._id, year, month, date })
     return (
         <>
             {role === ROLE.ADMIN && <VolumeForAdmin
-                user={user}
                 year={year}
                 month={month}
-                setUser={setUser}
+                date={date}
                 setYear={setYear}
                 setMonth={setMonth}
                 setDate={setDate}
@@ -32,6 +27,9 @@ const Volume = (props) => {
                 setHourEnd={setHourEnd}
             />}
             {role === ROLE.USER && <VolumeForUser
+                year={year}
+                month={month}
+                date={date}
                 setYear={setYear}
                 setMonth={setMonth}
                 setDate={setDate}

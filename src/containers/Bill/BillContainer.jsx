@@ -13,16 +13,13 @@ const Bill = () => {
   const [date, setDate] = useState();
   const [hourStart, setHourStart] = useState();
   const [hourEnd, setHourEnd] = useState();
-  const [user, setUser] = useState('');
 
   return (
     <div>
       {role === ROLE.ADMIN && <BillForAdmin
-        user={user}
         year={year}
         month={month}
         date={date}
-        setUser={setUser}
         setYear={setYear}
         setMonth={setMonth}
         setDate={setDate}

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { faHome, faSignInAlt, faRegistered } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DropdownNavbar from './DropdownNavbar';
 import { userImageUrl } from '../constants/imageUrl';
 
@@ -15,6 +15,7 @@ const Navbar = () => {
     const [height, setHeight] = React.useState(0);
     const token = useSelector(state => state.auth.login.token)
     const role = useSelector(state => state.auth.login.role);
+    const dispatch = useDispatch();
 
     const closeDropdown = () => {
         setHeight(0);

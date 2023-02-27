@@ -12,13 +12,17 @@ const waterSlice = createSlice({
     },
     reducers: {
         addVolume: (state, action) => {
-            state.volume.data = action.payload;
+            state.volumn.data = action.payload;
         },
         addBill: (state, action) => {
             state.bill.data = action.payload;
+        },
+        clearData: (state) => {
+            state.bill.data = null;
+            state.volumn.data = null;
         }
     }
 })
 
-export const {addBill, addVolume} = waterSlice.actions;
+export const {addBill, addVolume, clearData} = waterSlice.actions;
 export default waterSlice.reducer;

@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getBillForUser, getVolumeForUser } from '../../apis/water.api';
 import { ROLE } from '../../constants/role';
+import { validateInput } from './config';
+import { clearData } from '../../redux/water.slice';
+import { useLocation } from 'react-router-dom';
 
-const FilterDate = ({ setMonth, setYear, setDate, year, month, date }) => {
+const FilterDate = ({ setYear, setMonth, setDate, year, month, date }) => {
 
+    const location = useLocation();
+    const page = location.pathname.slice(1);
     const user = useSelector((s) => s.role.admin.currentUser);
     const token = useSelector((s) => s.auth.login.token);
     const role = useSelector((s) => s.auth.login.role);
     const dataBill = useSelector((s) => s.water.bill.data)
     const dataVolumn = useSelector((s) => s.water.volumn.data)
-    const page = useSelector((s) => s.role.admin.page)
     const dispatch = useDispatch()
+    const [isError, setError] = useState(true);
 
     function getBill() {
         const data = {
@@ -19,7 +24,7 @@ const FilterDate = ({ setMonth, setYear, setDate, year, month, date }) => {
             month: month,
             date: date
         }
-        if (user && year && date) {
+        if (year && date) {
             getBillForUser(data, token, dispatch);
         }
     }
@@ -41,8 +46,6 @@ const FilterDate = ({ setMonth, setYear, setDate, year, month, date }) => {
             year: year,
             month: month,
             date: date,
-            // h_start: hourStart,
-            // h_end: hourEnd
         }
         if (year && month && date) {
             getVolumeForUser(data, token, dispatch)
@@ -58,6 +61,7 @@ const FilterDate = ({ setMonth, setYear, setDate, year, month, date }) => {
             // h_start: hourStart,
             // h_end: hourEnd
         }
+        console.log(data)
         if (user && year && month && date) {
             getVolumeForUser(data, token, dispatch)
         }
@@ -78,19 +82,39 @@ const FilterDate = ({ setMonth, setYear, setDate, year, month, date }) => {
     }
 
     const handleChangeInput = (e) => {
-        switch (e.target.name) {
+        dispatch(clearData());
+        const value = Number(e.target.value);
+        const name = e.target.name;
+        let err;
+        switch (name) {
             case "year":
-                setYear(e.target.value);
+                setYear(value);
+                err = validateInput("year", value);
+                if (err) {
+                    setError(true);
+                }
                 break;
             case "month":
-                setMonth(e.target.value);
+                setMonth(value);
                 break;
             case "date":
-                setDate(e.target.value);
+                setDate(value);
                 break;
             default:
         }
     }
+
+    useEffect(() => {
+        if (!year || !month || !date) {
+            setError(true);
+        } else {
+            setError(false);
+        };
+    }, [year, month, date])
+
+    useEffect(() => {
+        dispatch(clearData());
+    }, [])
 
     return (
         <div className="filter-content month-filter">
@@ -110,17 +134,20 @@ const FilterDate = ({ setMonth, setYear, setDate, year, month, date }) => {
                 onChange={handleChangeInput}
             />
             <button className='get-data-btn'
-                style={(year < 1900 || month > 12 || month < 1 || date < 0 || date > 31) ? { pointerEvents: "none", opacity: "0.5" } : {}}
+                style={(isError) ? { pointerEvents: "none", opacity: "0.5" } : {}}
                 onClick={toggleGetData}
             >Get data</button>
             <div className="data-bill">
-                <p className="total_money">Total money: {dataBill?.totalMoney}</p>
+                {page === "bill" && <p className="total_money">Total money: {dataBill?.totalMoney}</p>}
             </div>
             <div className="data-volume">
-                {dataVolumn && <div className="cold">
-                    <p><b>Cole: </b> <span>Volume: {dataVolumn.cold.volumn}</span></p>
-                    <p><b>Hot: </b> <span>Volume: {dataVolumn.hot.dataVolumn}</span>, <span>temp: {dataVolumn.hot.temp}</span></p>
-                </div>}
+                {page === "volume" &&
+                    <>
+                        {dataVolumn && <>
+                            <p className='temp-text'><b>Cole: </b> <span>Volume: {dataVolumn.cold.volumn}</span></p>
+                            <p className='temp-text'><b>Hot: </b> <span>Volume: {dataVolumn.hot.volumn}</span> <span>Temp: {dataVolumn.hot.temp}</span></p>
+                        </>}
+                    </>}
             </div>
         </div>
     )

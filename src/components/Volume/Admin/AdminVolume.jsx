@@ -4,16 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import FilterYear from '../../Filter/FilterYear';
 import FilterMonth from '../../Filter/FilterMonth';
 import FilterDate from '../../Filter/FilterDate';
-import { addCurrentUser, addPage } from '../../../redux/role.slice';
+import { addCurrentUser } from '../../../redux/role.slice';
+import { useLocation } from 'react-router-dom';
 
-function VolumeForAdmin({ user, year, month, date, setUser, setYear, setMonth, setDate, setHourStart, setHourEnd }) {
+function VolumeForAdmin({ year, month, date, setYear, setMonth, setDate, setHourStart, setHourEnd }) {
     const listUsers = useSelector((state) => state.role.admin.listUsers);
     const [filterYear, setFilterYear] = useState(false);
     const [filterMonth, setFilterMonth] = useState(false);
     const [filterDate, setFilterDate] = useState(false);
     const currentUser = useSelector((state) => state.role.admin.currentUser);
     const dispatch = useDispatch()
-    
+    const location = useLocation()
+
+    console.log(location.pathname.slice(1))
+
     return (
         <div className='session volume-admin'>
             <div className="volume_left">
@@ -24,7 +28,6 @@ function VolumeForAdmin({ user, year, month, date, setUser, setYear, setMonth, s
                         className={item._id === currentUser?._id ? 'active' : ''}
                         onClick={() => {
                             dispatch(addCurrentUser(item));
-                            dispatch(addPage("volume"))
                         }}
                         key={index}
                     >
@@ -36,7 +39,7 @@ function VolumeForAdmin({ user, year, month, date, setUser, setYear, setMonth, s
             </div>
             {currentUser && <div className="volume-right">
                 <div className="filter-bar">
-                    <h4>Filter for {user.username}</h4>
+                    <h4>Filter {currentUser.username}</h4>
                     <div className='filter-input'>
                         <div>
                             <input type="radio" name="filter" id="year"
@@ -72,7 +75,7 @@ function VolumeForAdmin({ user, year, month, date, setUser, setYear, setMonth, s
                 </div>
                 {filterYear && <><FilterYear setYear={setYear} year={year} /></>}
                 {filterMonth && <><FilterMonth setYear={setYear} setMonth={setMonth} year={year} month={month} /></>}
-                {filterDate && <><FilterDate setYear={setYear} setMonth={setMonth} year={year} month={month} date={date} /></>}
+                {filterDate && <><FilterDate setYear={setYear} setMonth={setMonth} setDate={setDate} year={year} month={month} date={date} /></>}
             </div>}
         </div >
     );

@@ -4,18 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import FilterYear from '../../Filter/FilterYear';
 import FilterMonth from '../../Filter/FilterMonth';
 import FilterDate from '../../Filter/FilterDate';
-import { addCurrentUser, addPage } from '../../../redux/role.slice';
+import { addCurrentUser } from '../../../redux/role.slice';
+import { useLocation } from 'react-router-dom';
 
 
 
-const BillForAdmin = ({ user, year, month, date, setUser, setYear, setMonth, setDate, setHourStart, setHourEnd }) => {
+const BillForAdmin = ({ year, month, date, setYear, setMonth, setDate, setHourStart, setHourEnd }) => {
 
     const listUsers = useSelector((state) => state.role.admin.listUsers);
+    const location = useLocation();
     const [filterYear, setFilterYear] = useState(false);
     const [filterMonth, setFilterMonth] = useState(false);
     const [filterDate, setFilterDate] = useState(false);
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.role.admin.currentUser);
+    const page = location.pathname.slice(1);
+
+    console.log(page);
 
     return (
         <div className='session bill-admin'>
@@ -28,7 +33,6 @@ const BillForAdmin = ({ user, year, month, date, setUser, setYear, setMonth, set
                         onClick={() => {
                             console.log(item)
                             dispatch(addCurrentUser(item));
-                            dispatch(addPage("bill"))
                         }}
                         key={index}
                     >
@@ -40,7 +44,7 @@ const BillForAdmin = ({ user, year, month, date, setUser, setYear, setMonth, set
             </div>
             {currentUser && <div className="bill-right">
                 <div className="filter-bar">
-                    <h4>Filter for {user.username}</h4>
+                    <h4>Filter for {currentUser.username}</h4>
                     <div className='filter-input'>
                         <div>
                             <input type="radio" name="filter" id="year"

@@ -20,6 +20,7 @@ export const getVolumeForUser = async (data, token, dispatch) => {
         }
 
         const res = await response.json();
+        console.log('volume response: ',res)
         dispatch(addVolume(res))
     } catch (error) {
         console.log('Error: ', error);
@@ -57,6 +58,7 @@ export const getBillForUser = async (data, token, dispatch) => {
         }
 
         const res = await response.json();
+        console.log('bill response: ', res)
         dispatch(addBill(res));
         return res;
     } catch (error) {

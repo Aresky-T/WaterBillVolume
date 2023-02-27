@@ -21,7 +21,6 @@ function App() {
 
   useEffect(() => {
     if (currentRole !== null && currentRole === ROLE.ADMIN) {
-      console.log(token);
       getUsersByAdmin(token)
         .then(res => {
           dispatch(getListUsers(res.data.users))
