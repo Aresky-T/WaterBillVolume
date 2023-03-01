@@ -125,7 +125,7 @@ const FilterMonth = ({ setMonth, setYear, year, month }) => {
                 {page === "volume" &&
                     <>
                         {dataVolumn && <>
-                            <p className='temp-text'><b>Cole: </b> <span>Volume: {dataVolumn.cold.volumn}</span></p>
+                            <p className='temp-text'><b>Cold: </b> <span>Volume: {dataVolumn.cold.volumn}</span></p>
                             <p className='temp-text'><b>Hot: </b> <span>Volume: {dataVolumn.hot.volumn}</span> <span>Temp: {dataVolumn.hot.temp}</span></p>
                         </>}
                     </>}
